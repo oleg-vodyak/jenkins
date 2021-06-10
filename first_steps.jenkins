@@ -16,9 +16,14 @@ pipeline {
                 sh 'ssh jenkins@om-mng-04 \'hostname\''
             }
         }
-        stage("Second step") {
+        stage("Second step2") {
             steps {
                 sh '\'uptime\''
+            }
+             }
+        stage("Second step3") {
+            steps {
+                sh '\'pwd\''
             }
         }
     }
