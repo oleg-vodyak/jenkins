@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage("First step1") {
             steps {
-                sh 'ssh jenkins@om-mng-04 \'hostname\'''
+                sh 'ssh jenkins@om-mng-04 \'hostname\''
         stage("Second step"){
             steps{
                 sh 'ssh jenkins@om-mng-04 \'date\''
