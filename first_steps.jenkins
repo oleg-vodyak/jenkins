@@ -11,15 +11,15 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("First step1") {
+        stage("First step") {
             steps {
-                sh 'ssh jenkins@om-mng-04 \'hostname\''
+                sh 'ssh root@ub1 \'hostname\''
             }
+        }
         stage("Second step") {
-            steps{
-                sh 'ssh jenkins@om-mng-04 \'date\''
-                    }
-               }
+            steps {
+                sh 'ssh root@ub1 \'uptime\''
             }
         }
     }
+}
