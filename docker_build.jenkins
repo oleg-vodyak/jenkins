@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/toolbox') {
-                	sh 'docker build -t toolbox:latex . '
+                	sh 'docker build -t gladkovian/toolbox:latex . '
                 }
             }
         }
