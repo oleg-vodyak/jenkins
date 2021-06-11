@@ -26,14 +26,14 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/toolbox') {
-                	sh 'docker build -t gladkovian/toolbox:latex . '
+                	sh 'docker build -t gladkovian/toolbox:latest . '
                 }
             }
         stage("docker push") {
             steps{
                 echo "=============== start pushing image ==================="
                 sh '''
-                docker push gladkovian/toolbox:latex
+                docker push gladkovian/toolbox:latest
                 '''
             }
         }
