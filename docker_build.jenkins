@@ -5,7 +5,8 @@ properties([disableConcurrentBuilds()])
 pipeline {
     agent { 
         label 'master'
-       }
+        }
+    triggers { pollSCM('* * * * *') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -13,10 +14,10 @@ pipeline {
     stages {
         stage("docker login") {
             steps {
-                echo "=============== docker login ========================"
-                withCredentials ([usernamePassword(credentialsIs: 'gladkovian',  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_semaev', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh """
-                    dicker login -u $USERNAME -p $PASSWORD
+                    docker login -u $USERNAME -p $PASSWORD
                     """
                 }
             }
@@ -28,14 +29,14 @@ pipeline {
                 	sh 'docker build -t gladkovian/toolbox:latest . '
                 }
             }
+        }
         stage("docker push") {
-            steps{
-                echo "=============== start pushing image ==================="
+            steps {
+                echo " ============== start pushing image =================="
                 sh '''
                 docker push gladkovian/toolbox:latest
                 '''
             }
-         }
         }
     }
 }
