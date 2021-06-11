@@ -29,14 +29,14 @@ pipeline {
                 	sh 'docker build -t gladkovian/toolbox:latex . '
                 }
             }
+         }
         stage("docker push") {
             steps{
                 echo "=============== start pushing image ==================="
                 sh '''
                 docker push gladkovian/toolbox:latex
                 '''
-            }
-        }
+            }       
         }
     }
 }
