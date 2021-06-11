@@ -18,7 +18,7 @@ pipeline {
                 echo "=============== docker login ========================"
                 withCredentials ([usernamePassword(credentialsIs: 'gladkovian',  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh """
-                    dicker login -u $USERNAME -p $PASSWORD
+                    docker login -u $USERNAME -p $PASSWORD
                     """
                 }
             }
