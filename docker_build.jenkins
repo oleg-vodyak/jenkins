@@ -1,3 +1,4 @@
+
 #!groovy
 // Run docker build
 properties([disableConcurrentBuilds()])
@@ -6,7 +7,7 @@ pipeline {
     agent { 
         label 'master'
         }
-    triggers { pollSCM('* * * * *') }
+         triggers { pollSCM('* * * * *') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -14,10 +15,10 @@ pipeline {
     stages {
         stage("docker login") {
             steps {
-                echo " ============== docker login =================="
-                withCredentials([usernamePassword(credentialsId: 'gladkovian', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                echo "=============== docker login ========================"
+                withCredentials ([usernamePassword(credentialsIs: 'gladkovian',  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh """
-                    docker login -u $USERNAME -p $PASSWORD
+                    dicker login -u $USERNAME -p $PASSWORD
                     """
                 }
             }
@@ -26,17 +27,17 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/toolbox') {
-                	sh 'docker build -t gladkovian/toolbox:latest . '
+                	sh 'docker build -t gladkovian/toolbox:latex . '
                 }
             }
-        }
         stage("docker push") {
-            steps {
-                echo " ============== start pushing image =================="
+            steps{
+                echo "=============== start pushing image ==================="
                 sh '''
-                docker push gladkovian/toolbox:latest
+                docker push gladkovian/toolbox:latex
                 '''
             }
+        }
         }
     }
 }
