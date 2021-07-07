@@ -1,0 +1,12 @@
+pipeline {
+    agent { label 'ubuntu' }
+
+    stages {
+        stage('Doker version') {
+            steps {
+                sh "echo $USER"
+                sh "docker version"
+            }
+        }
+    }
+}
