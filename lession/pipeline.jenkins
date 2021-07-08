@@ -8,5 +8,13 @@ pipeline {
                 sh "docker version"
             }
         }
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/oleg-vodyak/jenkins.git'
+                    sh 'pwd'
+                    sh 'ls -all'
+            }
+        }
     }
 }
