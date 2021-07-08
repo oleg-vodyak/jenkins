@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Buiild docker inages') {
             steps {
-                did ('lession') {
+                dir ('lession') {
                     sh 'docker build -t gladkov/jenkins-images:01 .'
                 }
             }
