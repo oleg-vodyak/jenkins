@@ -16,5 +16,17 @@ pipeline {
                     sh 'ls -all'
             }
         }
+        stage('Test') {
+            steps {
+                dir ('lession') {
+                    sh 'pwd'
+                    sh 'ls -all'
+                }
+                dir ('docker'){
+                    sh 'pwd'
+                    sh 'ls -all'
+                }
+            }
+        }
     }
 }
