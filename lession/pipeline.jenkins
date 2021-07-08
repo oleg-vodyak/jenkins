@@ -31,7 +31,7 @@ pipeline {
         stage('Buiild docker inages') {
             steps {
                 dir ('lession') {
-                    sh 'docker build -t gladkov/jenkins-images:01 .'
+                    sh 'docker build -t gladkov/jenkins-images:0.1 .'
                 }
             }
         }
