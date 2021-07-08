@@ -28,5 +28,12 @@ pipeline {
                 }
             }
         }
+        stage('Buiild docker inages') {
+            steps {
+                did ('lession') {
+                    sh 'docker build -t gladkov/jenkins-images:01 .'
+                }
+            }
+        }
     }
 }
