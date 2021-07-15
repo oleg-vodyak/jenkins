@@ -16,5 +16,6 @@ RUN yum install openssh-clients -y
 RUN useradd -rm -d /home/arcsight -s /bin/bash -g root -u 1000 arcsight
 RUN  echo 'arcsight:arcsight' | chpasswd
 EXPOSE 22
+EXPOSE 8443
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init","-D"]
