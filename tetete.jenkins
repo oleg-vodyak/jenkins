@@ -8,12 +8,6 @@ pipeline {
                 sh "docker version"
             }
         }
-        stage('Delete workspace before build starts') {
-            steps {
-                echo "============= Deleting workspace ============="
-                deleteDir()
-            }
-        }
         stage('Checkout') {
             steps {
                 echo "============= dowload gethub ==============="
@@ -40,24 +34,21 @@ pipeline {
             steps {
                 echo "============ build images ======================"
                 dir ('lession') {
-                    sh 'docker build -t gladkovian/jenkins-images:0.3 .'
+                    sh 'docker build -t gladkov/jenkins-images:0.1 .'
                 }
             }
         }
-        stage('Push build docker images to Docket Hub') {
+        stage("docker login") {
             steps {
-                echo "======================= Push to DockerHub ================================"
-                withDockerRegistry(credentialsId: 'gladkovian', url: 'https://index.docker.io/v1/') {
-                    sh """
-                        docker push gladkovian/jenkins-images:0.3
-                    """
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'gladkovian', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh '''
+                    docker login -u $USERNAME -p $PASSWORD
+                    '''
+                    sh '''
+                    docker push gladkov/jenkins-images:0.1
+                    '''
                 }
-            }
-        }
-        stage('Delete docker image locally') {
-            steps{
-                echo "======================= Delete locally ================================"
-                sh 'docker rmi gladkovian/jenkins-images:0.3'
             }
         }
     }
