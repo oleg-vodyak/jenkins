@@ -1,7 +1,7 @@
 FROM centos:7
 ENV container docker
-RUN yum -y update; yum clean all
-RUN yum -y install systemd; yum clean all; \
+RUN yum update -y; yum clean all -y
+RUN yum install systemd -y; yum clean all -y; \
 (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
 rm -f /etc/systemd/system/*.wants/*;\
