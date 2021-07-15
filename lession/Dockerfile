@@ -14,8 +14,10 @@ RUN yum install net-tools -y
 RUN yum install openssh-server -y
 RUN yum install openssh-clients -y
 RUN useradd -rm -d /home/arcsight -s /bin/bash -g root -u 1000 arcsight
-RUN  echo 'arcsight:arcsight' | chpasswd
-EXPOSE 22
-EXPOSE 8443
+RUN echo 'arcsight:arcsight' | chpasswd
+RUN yum install rsyslog -y 
+EXPOSE 22/tcp
+EXPOSE 8443/tcp
+EXPOSE 514/udp
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init","-D"]
